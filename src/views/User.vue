@@ -23,7 +23,6 @@ export default {
   // computed:{},
 
   mounted() {
-    console.log(process.env, "sss");
   }
 
   // watch(){},

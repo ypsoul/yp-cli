@@ -1,6 +1,10 @@
-const path = require("path");
+const path = require("path")
 
-const uglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const webpack = require('webpack')
+
+const uglifyJsPlugin = require("uglifyjs-webpack-plugin")
+
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
 const IsProduction = process.env.NODE_ENV === "production";
 
@@ -61,6 +65,21 @@ module.exports = {
     // 开发环境
   },
   configureWebpack: config => {
+    config.plugins.push(
+      new webpack.DllReferencePlugin({
+        context: process.cwd(),
+        manifest: require('./public/vendor/vendor-manifest.json')
+      }),
+      // 将 dll 注入到 生成的 html 模板中
+      new AddAssetHtmlPlugin({
+        // dll文件位置
+        filepath: path.resolve(__dirname, './public/vendor/*.js'),
+        // dll 引用路径
+        publicPath: './vendor',
+        // dll最终输出的目录
+        outputPath: './vendor'
+      })
+    )
     if (IsProduction) {
       config.plugins.push(
         new uglifyJsPlugin({
