@@ -1,1 +1,3 @@
-export const reqApi2 = 'reqApi'
+export const reqApi = 'reqApi'
+
+export const GET_TOKEN = 'reqApi'

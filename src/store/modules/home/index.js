@@ -1,6 +1,6 @@
 
 import {
-  reqApi2
+  reqApi
 } from '../../mutation-type'
 
 export default {
@@ -11,12 +11,12 @@ export default {
   actions: {
     reqApi (context,payload) {
       setTimeout(() => {
-        context.commit(reqApi2, payload)
+        context.commit(reqApi, payload)
       }, 1000)
     }
   },
   mutations: {
-    [reqApi2] (state, payload) {
+    [reqApi] (state, payload) {
       state.count = state.count + payload
     }
   }
